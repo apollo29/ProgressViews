@@ -1,24 +1,33 @@
 import java.text.SimpleDateFormat
 
 apply plugin: 'com.android.library'
-apply plugin: 'digital.wup.android-maven-publish'
+apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 // Sources
 task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
-publishing {
-    publications {
-        mavenAar(MavenPublication) {
-            groupId = 'com.github.apollo29'
-            artifactId = 'ProgressViews'
-            version = "$project.version"
-            // Publish AAR
-            from components.android
-            // Publish sources
-            artifact sourceJar {
-                classifier "sources"
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+
+                groupId = 'com.github.apollo29'
+                artifactId = 'ProgressViews'
+                version = "$project.version"
+            }
+
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.debug
+
+                groupId = 'com.github.apollo29'
+                artifactId = 'ProgressViews'
+                version = "$project.version"
             }
         }
     }
@@ -38,7 +47,6 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.10"
-
     testImplementation 'junit:junit:4.13.2'
 }
 
