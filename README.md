@@ -13,7 +13,7 @@ This repository started as a personal usage of [Zeki Guler](https://github.com/z
 
 ```groovy
 dependencies {
-    implementation 'com.github.apollo29:ProgressViews:1.0.0'
+    implementation 'com.github.apollo29:ProgressViews:1.0.1'
 }
 ```
 ```
