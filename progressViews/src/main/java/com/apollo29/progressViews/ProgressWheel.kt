@@ -1,4 +1,4 @@
-package com.app.progresviews
+package com.apollo29.progressViews
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -9,7 +9,6 @@ import android.graphics.RectF
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
-import com.apollo29.progressViews.R
 
 class ProgressWheel : View {
 
