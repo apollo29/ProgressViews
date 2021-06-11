@@ -1,0 +1,52 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'com.android.library'
+apply plugin: 'digital.wup.android-maven-publish'
+
+// Sources
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+}
+
+publishing {
+    publications {
+        mavenAar(MavenPublication) {
+            groupId = 'com.github.apollo29'
+            artifactId = 'ProgressViews'
+            version = "$project.version"
+            // Publish AAR
+            from components.android
+            // Publish sources
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode createVersionCode()
+        versionName "$project.version"
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.10"
+
+    testImplementation 'junit:junit:4.13.2'
+}
+
+def createVersionCode(){
+    def df = new SimpleDateFormat("yyMMddHHmm")
+    df.setTimeZone(TimeZone.getTimeZone("de_CH"))
+    def versionCode = df.format(new Date()).toInteger()
+    println "#### createVersionCode: " + versionCode + " ####"
+
+    return versionCode
+}

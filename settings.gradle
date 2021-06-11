@@ -1,0 +1,2 @@
+include ':progressViews'
+rootProject.name='ProgressViews'
